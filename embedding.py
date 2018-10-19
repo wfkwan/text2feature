@@ -41,8 +41,15 @@ class WordEmbedding(object):
 	    	f.write("unmatched_token,count\n")
 	    	for tok, count in unmatched_token:
 	    		f.write("%s,%d\n" % (tok, count))
-	    self.coverage = 100 * len(list(set(matched_token))) / (len(matched_token)+ len(unmatched_token))
-	    print("Embedding converage is %.2f " % self.coverage, "%")
+	    self.uniq_dist_coverage = 100 * len(list(set(matched_token))) / (len(matched_token)+ len(unmatched_token))
+
+	    #### TODO: render it
+	    num_matched_tokens = sum([v for k,v in matched_token.items()])
+	    num_unmatched_tokens = sum([v for k,v in unmatched_token])
+	    self.coverage = 100 * num_matched_tokens / (num_matched_tokens + num_unmatched_tokens)
+
+	    print("Embedding converage (in terms of unique distinct tokens) is %.2f " % self.uniq_dist_coverage, "%")
+	    print("Embedding converage (in terms of number of occurance of tokens) is %.2f " % self.coverage, "%")
 	    return matched_token, unmatched_token
 
 	# train theembedding by ourselves instead of loading a pretrained one

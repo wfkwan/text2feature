@@ -14,3 +14,13 @@ DATA_PATH = "/Users/AndyKwan/Documents/COURSES/MSBD5012/project/data/"
 
 RAW_DATA = "wine-reviews/winemag-data-130k-v2.csv"
 # RAW_DATA = "wine-reviews/winemag-data_first150k.csv"
+
+# Choices: 'punctuation', 'alphabetic', 'stop_words'
+# must be a list
+TOKEN_FILTERS = ['punctuation']
+# None means default
+TOKENIZER = None
+
+# Whether to convert the y values into categories
+CONVERT_Y = True
+Y_CAT_INTERVALS = [80, 82, 84, 86, 88]

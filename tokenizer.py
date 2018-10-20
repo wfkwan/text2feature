@@ -33,30 +33,24 @@ class FilteredTokenizer(object):
             return tokens
         if not stop_words:
             stop_words = set(stopwords.words('english'))
-            return [w for w in tokens if not w in stop_words]
-        else:
-            return [w for w in tokens if not w in stop_words]
-        
-    def short_tokens_filter(self, tokens=None, length=1):
-        if not tokens:
-            return tokens
-        return [word for word in tokens if len(word) > length]
+        return [w for w in tokens if not w in stop_words]
     
-    def long_tokens_filter(self, tokens=None, length=70):
-        if not tokens:
-            return tokens
-        return [word for word in tokens if len(word) < length]
-    
-    def filter_and_tokenize(self, list_text):
+    def filter_and_tokenize(self, list_text, mode=['punctuation'], tokenizer=None):
+        if not isinstance(mode, list):
+            raise ValueError("Please input a list for mode!")
         # modify this line to use other tokens
-        self.tokenize(list_text)
+        self.tokenize(list_text, tokenizer)
         self.tokens = []
-        for tok in self.raw_tokens:
-            tokens = self.punctuation_filter(tok)
-    #         tokens = self.alphabetic_filter(self.tokens)
-    #         tokens = self.stop_words_filter(self.tokens)
-    #         tokens = self.short_tokens_filter(self.tokens)
-    #         tokens = self.long_tokens_filter(self.tokens)
+
+        # don't prefer stemming since the stemmed words will not be in the embedding
+        for tokens in self.raw_tokens:
+            for m in mode:
+                if m == 'punctuation':
+                    tokens = self.punctuation_filter(tokens)
+                elif m == 'alphabetic':
+                    tokens = self.alphabetic_filter(tokens)
+                elif m == 'stop_words':
+                    tokens = self.stop_words_filter(tokens)
             self.tokens.append(tokens)
         return self.tokens
 

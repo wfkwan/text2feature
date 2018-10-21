@@ -20,7 +20,10 @@ RAW_DATA = "wine-reviews/winemag-data-130k-v2.csv"
 TOKEN_FILTERS = ['punctuation']
 # None means default
 TOKENIZER = None
+DROP_SHORT_SENTENCES = 5
+DROP_LONG_SENTENCES = 70
 
 # Whether to convert the y values into categories
 CONVERT_Y = True
 Y_CAT_INTERVALS = [80, 82, 84, 86, 88]
+

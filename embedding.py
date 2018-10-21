@@ -62,4 +62,5 @@ class WordEmbedding(KeyedVectors):
 	# train theembedding by ourselves instead of loading a pretrained one
 	def trainable_embedding_layer(self):
 	    raise NotImplementedError("This part is not yet written!")
+	    # self.get_keras_embedding()
 

@@ -1,7 +1,5 @@
 # text2feature
 
-# A wrapper to make preprocessing generic and easy
-# the code is developing
+A wrapper to make preprocessing generic and easy, the code is developing
 
-
-# TODO: add documentations
+TODO: add documentations

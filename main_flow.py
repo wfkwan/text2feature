@@ -10,6 +10,7 @@ from config import (EMBEDDING_PATH, EMBEDDING_FNAME, DATA_PATH, RAW_DATA,
 					DROP_LONG_SENTENCES)
 import os
 import pandas as pd
+from transformer import Transformer
 
 fpath = os.path.join(DATA_PATH, RAW_DATA)
 df = pd.read_csv(fpath)
@@ -36,7 +37,6 @@ print("WordEmbedding_.coverage", WordEmbedding_.coverage)
 print("You can get a word vector of the word 'hello' by calling: WordEmbedding_.word_vectors.get_vector('hello')", 
 	  WordEmbedding_.word_vectors.get_vector('hello'))
 
-from transformer import Transformer
 T = Transformer(WordEmbedding_.wordvec_map)
 
 # will convert the points numbers (score values) into one-hot vectors of categories defined by us (interval)
@@ -44,3 +44,4 @@ T = Transformer(WordEmbedding_.wordvec_map)
 y = df['points'].tolist()
 X, y = T.fit_transform(Tokens, y, drop_long_sentences=DROP_LONG_SENTENCES,
                     drop_short_sentences=DROP_SHORT_SENTENCES, num2cat_=CONVERT_Y, intervals=Y_CAT_INTERVALS)
+print("X.shape, y.shape ", X.shape, y.shape)

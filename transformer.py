@@ -125,7 +125,7 @@ class MeanEmbeddingVectorizer(object):
     		raise ValueError("Please input intervals to transform y!")
     	if num2cat_:
     		y = num2cat(y, intervals)
-    		y = to_categorical(y, len(set(y))).astype(int)
+    	y = to_categorical(y, len(set(y))).astype(int)
     	return np.array([np.mean([self.word2vec[w] for w in words if w in self.word2vec]
                     	or [np.zeros(self.dim)], axis=0)
             			for words in X

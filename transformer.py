@@ -3,6 +3,8 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 from keras.utils.np_utils import to_categorical
+import re
+import os
 
 
 class Transformer(object):
@@ -135,7 +137,23 @@ def num2cat(list_of_numbers=None, list_of_intervals=None):
 	if not list_of_intervals or not list_of_numbers:
 		raise ValueError("Please input a list of numbers and the corresponding intervals " 
 						 "for numbers to categories convertion!")
-	return pd.cut(list_of_numbers, list_of_intervals).labels.tolist()
+	#return pd.cut(list_of_numbers, list_of_intervals).labels.tolist()
+	return pd.cut(list_of_numbers, list_of_intervals).codes.tolist()
+
+def write_csv(X, y):
+	if isinstance(X, np.ndarray) and isinstance(y, np.ndarray):
+		ind = 0
+		for file in [i for i in os.walk('.')][0][2]:
+		    if re.match("X%d.csv" % ind, file):
+		        ind += 1
+		if ind != 0:
+		    np.savetxt("X%d.csv" % ind, X, delimiter=",")
+		    np.savetxt("y%d.csv" % ind, y, delimiter=",")
+		else:
+		    np.savetxt("X.csv", X, delimiter=",")
+		    np.savetxt("y.csv", y, delimiter=",")
+	else:
+		raise ValueError("Make sure that you have inputed numpy arrays!")
 
 
 

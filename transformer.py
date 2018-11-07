@@ -94,11 +94,19 @@ class TfidfEmbeddingVectorizer(object):
 
 # count based vectorizer
 class MeanEmbeddingVectorizer(object):
-    def __init__(self, word2vec):
+    def __init__(self, word2vec, dim=None):
         self.word2vec = word2vec
         # if a text is empty we should return a vector of zeros
         # with the same dimensionality as all the other vectors
-        self.dim = len(word2vec.itervalues().next())
+        if not dim:
+            print("Automatically set dimension of vectors to be 300.")
+            self.dim = 300
+        else:
+            dim = len(set([v.shape[0] for k,v in word2vec.items()]))
+            if  dim > 1:
+                raise ValueError("Nonunique dimensions found on the vectors")
+            else:
+                self.dim = dim
 
     def fit(self, X, y, drop_short_sentences=None, drop_long_sentences=None):
     	# row number of the matrix to mapping of document number

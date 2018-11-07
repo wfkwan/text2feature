@@ -15,9 +15,11 @@ DATA_PATH = "/Users/AndyKwan/Documents/COURSES/MSBD5012/project/data/"
 RAW_DATA = "wine-reviews/winemag-data-130k-v2.csv"
 # RAW_DATA = "wine-reviews/winemag-data_first150k.csv"
 
-# Choices: 'punctuation', 'alphabetic', 'stop_words'
+# Choices: 'punctuation', 'alphabetic', 'stop_words', 'custom_filter'
 # must be a list
-TOKEN_FILTERS = ['punctuation']
+TOKEN_FILTERS = ['punctuation', 'custom_filter']
+# used only when custom_filter is specified for TOKEN_FILTERS
+CUSTOM_FILTER_PATH = "/Users/AndyKwan/Documents/COURSES/MSBD5012/project/code/filter.txt"
 # None means default
 TOKENIZER = None
 DROP_SHORT_SENTENCES = 5

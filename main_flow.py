@@ -7,7 +7,7 @@ from embedding import WordEmbedding
 from transformer import Transformer
 from config import (EMBEDDING_PATH, EMBEDDING_FNAME, DATA_PATH, RAW_DATA, 
 					TOKEN_FILTERS, TOKENIZER, Y_CAT_INTERVALS, CONVERT_Y, DROP_SHORT_SENTENCES,
-					DROP_LONG_SENTENCES)
+					DROP_LONG_SENTENCES, CUSTOM_FILTER_PATH)
 import os
 import pandas as pd
 from transformer import Transformer
@@ -17,7 +17,7 @@ df = pd.read_csv(fpath)
 descriptions = df['description'].tolist()
 
 FT = FilteredTokenizer()
-Tokens = FT.filter_and_tokenize(descriptions, mode=TOKEN_FILTERS, tokenizer=TOKENIZER)
+Tokens = FT.filter_and_tokenize(descriptions, mode=TOKEN_FILTERS, tokenizer=TOKENIZER, filter_fpath=CUSTOM_FILTER_PATH)
 
 WordEmbedding_ = WordEmbedding()
 WordEmbedding_.load()

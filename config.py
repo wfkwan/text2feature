@@ -27,5 +27,5 @@ DROP_LONG_SENTENCES = 70
 
 # Whether to convert the y values into categories
 CONVERT_Y = True
-Y_CAT_INTERVALS = [80, 82, 84, 86, 88]
+Y_CAT_INTERVALS = [79.5, 83.5, 87.5, 91.5, 95.5]
 

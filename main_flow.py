@@ -14,6 +14,10 @@ from transformer import Transformer
 
 fpath = os.path.join(DATA_PATH, RAW_DATA)
 df = pd.read_csv(fpath)
+
+# Drop duplicates reivews
+df = df[~df.duplicated('description')]
+
 descriptions = df['description'].tolist()
 
 FT = FilteredTokenizer()
